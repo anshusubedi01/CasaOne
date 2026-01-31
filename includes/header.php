@@ -31,6 +31,10 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
                 <a href="feedback.php" class="<?= $currentPage === 'feedback' ? 'active' : '' ?>">Feedback</a>
                 <a href="<?= isLoggedInAsUser() ? 'my-bookings.php' : 'login.php?redirect=' . urlencode('my-bookings.php') ?>" class="<?= $currentPage === 'my-bookings' ? 'active' : '' ?>">Bookings</a>
                 <?php if (isLoggedInAsUser()): ?>
+<<<<<<< HEAD
+=======
+                    <a href="booking.php">Booking</a>
+>>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47
                     <a href="logout.php" class="btn-nav">Logout</a>
                 <?php else: ?>
                     <a href="admission.php">Admission</a>

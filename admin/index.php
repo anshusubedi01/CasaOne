@@ -14,6 +14,7 @@ try {
 } catch (Throwable $e) { }
 $countComplaints = $pdo->query("SELECT COUNT(*) FROM complaint")->fetchColumn();
 $countPayments = $pdo->query("SELECT COUNT(*) FROM payment")->fetchColumn();
+<<<<<<< HEAD
 
 try {
     $dashboardRooms = $pdo->query("
@@ -31,6 +32,8 @@ $roomImages = ['room1.jpeg', 'room2.jpeg', 'room3.jpeg', 'room4.jpeg'];
 function getRoomImageDashboard($index, $images) {
     return $images[$index % count($images)];
 }
+=======
+>>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47
 ?>
 <section class="section">
     <div class="container">
@@ -66,6 +69,7 @@ function getRoomImageDashboard($index, $images) {
                 <p><?= (int)$countPayments ?> payments</p>
             </a>
         </div>
+<<<<<<< HEAD
 
         <h2 style="margin: 2rem 0 1rem;">Room details</h2>
         <p style="color: var(--color-text-muted); margin-bottom: 1rem;">Rooms from database — <a href="rooms.php">Manage rooms</a></p>
@@ -89,6 +93,8 @@ function getRoomImageDashboard($index, $images) {
         <?php if (empty($dashboardRooms)): ?>
         <p style="color: var(--color-text-muted); margin-bottom: 2rem;">No rooms yet. <a href="rooms.php">Add rooms</a>.</p>
         <?php endif; ?>
+=======
+>>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47
     </div>
 </section>
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

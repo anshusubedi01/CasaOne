@@ -5,6 +5,28 @@ require_once __DIR__ . '/includes/auth.php';
 require_once __DIR__ . '/includes/header.php';
 
 $pdo = getDB();
+<<<<<<< HEAD
+=======
+$feePaySuccess = '';
+$feePayError = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'pay_cash' && isLoggedInAsUser()) {
+    $amount = (float)($_POST['amount'] ?? 0);
+    if ($amount > 0) {
+        try {
+            $userId = getCurrentUserId();
+            $stmt = $pdo->prepare("INSERT INTO payment (u_id, a_id, amount, pay_date, pay_type) VALUES (?, NULL, ?, CURDATE(), 'cash payment')");
+            $stmt->execute([$userId, $amount]);
+            $feePaySuccess = 'Cash payment recorded. It will appear in admin panel.';
+        } catch (PDOException $e) {
+            $feePayError = 'Payment could not be recorded.';
+        }
+    } else {
+        $feePayError = 'Please enter a valid amount.';
+    }
+}
+
+>>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47
 $fees = [];
 
 try {
@@ -83,6 +105,36 @@ $defaultFees = [
                 <p>Fees include accommodation, meals, electricity, WiFi, and housekeeping services. Security deposit of one month's rent required at admission.</p>
             </div>
         </div>
+<<<<<<< HEAD
+=======
+
+        <?php if (isLoggedInAsUser()): ?>
+        <div class="form-card" style="max-width: 400px; margin: 2rem auto 0;">
+            <h3>Pay (Cash only)</h3>
+            <?php if ($feePaySuccess): ?><div class="alert alert-success"><?= htmlspecialchars($feePaySuccess) ?></div><?php endif; ?>
+            <?php if ($feePayError): ?><div class="alert alert-error"><?= htmlspecialchars($feePayError) ?></div><?php endif; ?>
+            <form method="post">
+                <input type="hidden" name="action" value="pay_cash">
+                <div class="form-group">
+                    <label>Amount (Rs.) *</label>
+                    <select name="amount" required>
+                        <option value="">Select amount</option>
+                        <?php if (!empty($fees)): ?>
+                            <?php foreach ($fees as $f): $mp = $f['price'] ?? 0; if ($mp > 0): ?>
+                            <option value="<?= (int)$mp ?>"><?= htmlspecialchars($f['type'] ?? '') ?> — Rs. <?= number_format($mp) ?>/month</option>
+                            <?php endif; endforeach; ?>
+                        <?php else: ?>
+                            <?php foreach ($defaultFees as $f): ?>
+                            <option value="<?= (int)$f['monthly'] ?>"><?= htmlspecialchars($f['type']) ?> — Rs. <?= number_format($f['monthly']) ?>/month</option>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Pay</button>
+            </form>
+        </div>
+        <?php endif; ?>
+>>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47
     </div>
 </section>
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

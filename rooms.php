@@ -17,6 +17,24 @@ $rooms = $stmt->fetchAll();
 // Room images array - cycles through available images (stored in project root)
 $roomImages = ['room1.jpeg', 'room2.jpeg', 'room3.jpeg', 'room4.jpeg'];
 
+<<<<<<< HEAD
+=======
+// Default rooms to display if database is empty
+$defaultRooms = [
+    ['room_no' => '101', 'h_name' => 'CasaOne Hostel', 'type' => 'Single Room', 'capacity' => 1, 'price' => 15000, 'availability' => 'available'],
+    ['room_no' => '102', 'h_name' => 'CasaOne Hostel', 'type' => 'Double Sharing', 'capacity' => 2, 'price' => 12000, 'availability' => 'available'],
+    ['room_no' => '103', 'h_name' => 'CasaOne Hostel', 'type' => 'Triple Sharing', 'capacity' => 3, 'price' => 11000, 'availability' => 'available'],
+    ['room_no' => '104', 'h_name' => 'CasaOne Hostel', 'type' => 'Four Sharing', 'capacity' => 4, 'price' => 10000, 'availability' => 'available'],
+    ['room_no' => '105', 'h_name' => 'CasaOne Hostel', 'type' => 'Single Room', 'capacity' => 1, 'price' => 15000, 'availability' => 'available'],
+    ['room_no' => '106', 'h_name' => 'CasaOne Hostel', 'type' => 'Double Sharing', 'capacity' => 2, 'price' => 12000, 'availability' => 'available'],
+];
+
+// Use default rooms if database is empty
+if (empty($rooms)) {
+    $rooms = $defaultRooms;
+}
+
+>>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47
 function getRoomImage($index, $images) {
     // Images are in the project root folder
     return $images[$index % count($images)];
@@ -38,6 +56,7 @@ function getRoomImage($index, $images) {
                     <p class="room-fee">Rs. <?= number_format($r['price'] ?? 0) ?>/month</p>
                     <?php if (isset($r['room_id'])): ?>
                         <?php if (isLoggedInAsUser()): ?>
+<<<<<<< HEAD
                         <a href="my-bookings.php?room=<?= (int)$r['room_id'] ?>" class="btn btn-primary" style="margin-top:0.75rem;">Book Now</a>
                         <?php else: ?>
                         <a href="login.php?redirect=<?= urlencode('my-bookings.php') ?>" class="btn btn-secondary" style="margin-top:0.75rem;">Login to Book</a>
@@ -47,6 +66,17 @@ function getRoomImage($index, $images) {
                         <a href="my-bookings.php" class="btn btn-primary" style="margin-top:0.75rem;">Apply</a>
                         <?php else: ?>
                         <a href="login.php?redirect=<?= urlencode('my-bookings.php') ?>" class="btn btn-secondary" style="margin-top:0.75rem;">Login to Apply</a>
+=======
+                        <a href="booking.php?room=<?= (int)$r['room_id'] ?>" class="btn btn-primary" style="margin-top:0.75rem;">Book Now</a>
+                        <?php else: ?>
+                        <a href="login.php?redirect=<?= urlencode('rooms.php') ?>" class="btn btn-secondary" style="margin-top:0.75rem;">Login to Book</a>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <?php if (isLoggedInAsUser()): ?>
+                        <a href="booking.php" class="btn btn-primary" style="margin-top:0.75rem;">Apply</a>
+                        <?php else: ?>
+                        <a href="login.php?redirect=<?= urlencode('booking.php') ?>" class="btn btn-secondary" style="margin-top:0.75rem;">Login to Apply</a>
+>>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>
