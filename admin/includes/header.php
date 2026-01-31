@@ -34,6 +34,7 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
                 <a href="students.php" class="<?= $currentPage === 'students' ? 'active' : '' ?>">Students</a>
                 <a href="bookings.php" class="<?= $currentPage === 'bookings' ? 'active' : '' ?>">Bookings</a>
                 <a href="complaints.php" class="<?= $currentPage === 'complaints' ? 'active' : '' ?>">Complaints</a>
+                <a href="feedback.php" class="<?= $currentPage === 'feedback' ? 'active' : '' ?>">Feedback</a>
                 <a href="payments.php" class="<?= $currentPage === 'payments' ? 'active' : '' ?>">Payments</a>
                 <a href="users.php" class="<?= $currentPage === 'users' ? 'active' : '' ?>">Users</a>
                 <a href="../logout.php?admin=1" class="btn-nav">Logout</a>

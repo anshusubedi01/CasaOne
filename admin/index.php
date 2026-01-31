@@ -13,6 +13,10 @@ try {
     $countBookings = $pdo->query("SELECT COUNT(*) FROM booking")->fetchColumn();
 } catch (Throwable $e) { }
 $countComplaints = $pdo->query("SELECT COUNT(*) FROM complaint")->fetchColumn();
+$countFeedback = 0;
+try {
+    $countFeedback = $pdo->query("SELECT COUNT(*) FROM feedback")->fetchColumn();
+} catch (Throwable $e) { }
 $countPayments = $pdo->query("SELECT COUNT(*) FROM payment")->fetchColumn();
 
 
@@ -61,6 +65,10 @@ function getRoomImageDashboard($index, $images) {
             <a href="complaints.php" class="card" style="text-decoration:none; color:inherit;">
                 <h3>Complaints</h3>
                 <p><?= (int)$countComplaints ?> complaints</p>
+            </a>
+            <a href="feedback.php" class="card" style="text-decoration:none; color:inherit;">
+                <h3>Feedback</h3>
+                <p><?= (int)$countFeedback ?> feedback</p>
             </a>
             <a href="payments.php" class="card" style="text-decoration:none; color:inherit;">
                 <h3>Payments</h3>
