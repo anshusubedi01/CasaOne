@@ -39,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     }
 }
 
-
 try {
     $rooms = $pdo->query("
         SELECT r.room_id, r.room_no, r.price, r.availability, r.h_id,
@@ -68,24 +67,12 @@ $roomImages = ['room1.jpeg', 'room2.jpeg', 'room3.jpeg', 'room4.jpeg'];
 function getRoomImageAdmin($index, $images) {
     return $images[$index % count($images)];
 }
-
-$rooms = $pdo->query("
-    SELECT r.*, h.h_name,
-           (SELECT rt.type FROM roomtype rt WHERE rt.room_id = r.room_id LIMIT 1) as type,
-           (SELECT rt.capacity FROM roomtype rt WHERE rt.room_id = r.room_id LIMIT 1) as capacity
-    FROM room r
-    LEFT JOIN hostel h ON h.h_id = r.h_id
-    ORDER BY h.h_name, r.room_no
-")->fetchAll();
-$hostels = $pdo->query("SELECT h_id, h_name FROM hostel ORDER BY h_name")->fetchAll();
-
 ?>
 <section class="section">
     <div class="container">
         <h1 class="section-title">Rooms</h1>
         <?php if ($error): ?><div class="alert alert-error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
         <?php if ($success): ?><div class="alert alert-success"><?= htmlspecialchars($success) ?></div><?php endif; ?>
-
 
         <h2 style="margin-bottom: 1rem;">Room details</h2>
         <div class="card-grid" style="margin-bottom: 2rem;">
@@ -136,7 +123,7 @@ $hostels = $pdo->query("SELECT h_id, h_name FROM hostel ORDER BY h_name")->fetch
                 <div class="form-group">
                     <label>Room No *</label>
                     <input type="text" name="room_no" required>
-                </div> 
+                </div>
                 <div class="form-group">
                     <label>Price</label>
                     <input type="number" name="price" step="0.01" value="0">
@@ -207,9 +194,7 @@ $hostels = $pdo->query("SELECT h_id, h_name FROM hostel ORDER BY h_name")->fetch
             </table>
         </div>
         <?php if (empty($rooms)): ?>
-
         <p style="color: var(--color-text-muted);">No rooms yet. <?= empty($hostels) ? 'Add a hostel first, then ' : '' ?>add a room above.</p>
-        <p style="color: var(--color-text-muted);">No rooms yet. Add a hostel first.</p>
         <?php endif; ?>
     </div>
 </section>

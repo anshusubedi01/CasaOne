@@ -121,10 +121,6 @@ require_once __DIR__ . '/includes/header.php';
 
         <?php if (empty($bookings)): ?>
         <p style="text-align:center; color: var(--color-text-muted);">No bookings yet. Use the form above to book a room.</p>
-
-        <?php if (empty($bookings)): ?>
-        <p style="text-align:center; color: var(--color-text-muted);">No bookings yet. <a href="booking.php">Book a room</a>.</p>
-
         <?php else: ?>
         <div class="table-wrap">
             <table>
