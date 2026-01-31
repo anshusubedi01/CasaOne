@@ -5,11 +5,8 @@
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'project');
 define('DB_USER', 'root');
-<<<<<<< HEAD
 define('DB_PASS', 'axisrotation@3');
-=======
 define('DB_PASS', 'Software@123');
->>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47
 
 function getDB() {
     static $pdo = null;
@@ -25,4 +22,4 @@ function getDB() {
         }
     }
     return $pdo;
-}
+} 

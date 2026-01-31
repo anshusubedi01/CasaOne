@@ -67,5 +67,5 @@ CREATE TABLE IF NOT EXISTS `faq` (
 INSERT INTO `faq` (`question`, `answer`, `sort_order`) VALUES
 ('How do I book a room?', 'Go to the Booking page to select a room and check-in date. You can also apply from the Rooms page.', 1),
 ('What types of rooms are available?', 'See the Rooms page for room types, capacity, and availability.', 2),
-('What is the fee structure?', 'See the Fee page for monthly and annual rates by room type.', 3);
+('What is the fee structure?', 'See the Fee page for monthly and annual rates by room type.', 3); 
 

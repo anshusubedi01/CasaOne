@@ -42,7 +42,7 @@ try {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($bookings as $b): ?>
+                    <?php foreach ($bookings as $b): ?> 
                     <tr>
                         <td><?= (int)$b['b_id'] ?></td>
                         <td><?= htmlspecialchars($b['u_name'] ?? '—') ?> (<?= htmlspecialchars($b['u_email'] ?? '') ?>)</td>

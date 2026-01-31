@@ -84,3 +84,4 @@ function verifyPassword($password, $hash) {
 function isLoggedIn() {
     return isLoggedInAsUser() || isAdmin();
 }
+ 

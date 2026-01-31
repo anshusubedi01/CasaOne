@@ -6,7 +6,6 @@ require_once __DIR__ . '/includes/header.php';
 $pdo = getDB();
 $error = '';
 $success = '';
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['h_id'])) {
     $h_id = (int)$_POST['h_id'];
     try {

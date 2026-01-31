@@ -53,5 +53,5 @@ $total = $pdo->query("SELECT COALESCE(SUM(amount), 0) FROM payment")->fetchColum
         <p style="color: var(--color-text-muted);">No payments yet.</p>
         <?php endif; ?>
     </div>
-</section>
+</section> 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

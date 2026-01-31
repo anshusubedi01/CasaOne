@@ -1,17 +1,13 @@
 <?php
-<<<<<<< HEAD
-=======
+
 $pageTitle = 'Booking';
->>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47
 require_once __DIR__ . '/config/database.php';
 require_once __DIR__ . '/includes/auth.php';
 requireLogin();
 
-<<<<<<< HEAD
 $query = isset($_GET['room']) ? '?room=' . (int)$_GET['room'] : '';
 header('Location: my-bookings.php' . $query);
 exit;
-=======
 $error = '';
 $success = '';
 
@@ -89,4 +85,3 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 </section>
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
->>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47

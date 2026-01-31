@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     }
 }
 
-<<<<<<< HEAD
+
 try {
     $rooms = $pdo->query("
         SELECT r.room_id, r.room_no, r.price, r.availability, r.h_id,
@@ -68,7 +68,7 @@ $roomImages = ['room1.jpeg', 'room2.jpeg', 'room3.jpeg', 'room4.jpeg'];
 function getRoomImageAdmin($index, $images) {
     return $images[$index % count($images)];
 }
-=======
+
 $rooms = $pdo->query("
     SELECT r.*, h.h_name,
            (SELECT rt.type FROM roomtype rt WHERE rt.room_id = r.room_id LIMIT 1) as type,
@@ -78,7 +78,7 @@ $rooms = $pdo->query("
     ORDER BY h.h_name, r.room_no
 ")->fetchAll();
 $hostels = $pdo->query("SELECT h_id, h_name FROM hostel ORDER BY h_name")->fetchAll();
->>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47
+
 ?>
 <section class="section">
     <div class="container">
@@ -86,7 +86,7 @@ $hostels = $pdo->query("SELECT h_id, h_name FROM hostel ORDER BY h_name")->fetch
         <?php if ($error): ?><div class="alert alert-error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
         <?php if ($success): ?><div class="alert alert-success"><?= htmlspecialchars($success) ?></div><?php endif; ?>
 
-<<<<<<< HEAD
+
         <h2 style="margin-bottom: 1rem;">Room details</h2>
         <div class="card-grid" style="margin-bottom: 2rem;">
             <?php foreach ($rooms as $index => $r):
@@ -120,8 +120,6 @@ $hostels = $pdo->query("SELECT h_id, h_name FROM hostel ORDER BY h_name")->fetch
         <p style="color: var(--color-text-muted); margin-bottom: 2rem;">No rooms yet. Add a hostel and room below.</p>
         <?php endif; ?>
 
-=======
->>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47
         <?php if (!empty($hostels)): ?>
         <div class="form-card" style="max-width: 500px; margin-bottom: 2rem;">
             <h2>Add Room</h2>
@@ -138,7 +136,7 @@ $hostels = $pdo->query("SELECT h_id, h_name FROM hostel ORDER BY h_name")->fetch
                 <div class="form-group">
                     <label>Room No *</label>
                     <input type="text" name="room_no" required>
-                </div>
+                </div> 
                 <div class="form-group">
                     <label>Price</label>
                     <input type="number" name="price" step="0.01" value="0">
@@ -209,11 +207,9 @@ $hostels = $pdo->query("SELECT h_id, h_name FROM hostel ORDER BY h_name")->fetch
             </table>
         </div>
         <?php if (empty($rooms)): ?>
-<<<<<<< HEAD
+
         <p style="color: var(--color-text-muted);">No rooms yet. <?= empty($hostels) ? 'Add a hostel first, then ' : '' ?>add a room above.</p>
-=======
         <p style="color: var(--color-text-muted);">No rooms yet. Add a hostel first.</p>
->>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47
         <?php endif; ?>
     </div>
 </section>

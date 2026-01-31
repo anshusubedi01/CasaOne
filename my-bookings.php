@@ -6,7 +6,7 @@ requireLogin();
 
 $pdo = getDB();
 $userId = getCurrentUserId();
-<<<<<<< HEAD
+
 $bookingError = '';
 $bookingSuccess = '';
 $roomId = isset($_GET['room']) ? (int)$_GET['room'] : 0;
@@ -33,8 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room_id'])) {
         }
     }
 }
-=======
->>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['booking_id'])) {
     $bid = (int)$_POST['booking_id'];
@@ -71,7 +70,7 @@ $stmt = $pdo->prepare("
 $stmt->execute([$userId]);
 $bookings = $stmt->fetchAll();
 
-<<<<<<< HEAD
+
 $stmtRooms = $pdo->query("
     SELECT r.room_id, r.room_no, r.price, r.h_id, h.h_name
     FROM room r
@@ -81,15 +80,13 @@ $stmtRooms = $pdo->query("
 ");
 $rooms = $stmtRooms->fetchAll();
 
-=======
->>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47
 require_once __DIR__ . '/includes/header.php';
 ?>
 <section class="section">
     <div class="container">
         <h1 class="section-title">My Bookings</h1>
         <p style="text-align:center; color: var(--color-text-muted); margin-bottom:2rem;">Check-in, check-out, and payment.</p>
-<<<<<<< HEAD
+
 
         <div id="new-booking" class="form-card" style="max-width: 560px; margin: 0 auto 2rem;">
             <h2>New Booking</h2>
@@ -124,10 +121,10 @@ require_once __DIR__ . '/includes/header.php';
 
         <?php if (empty($bookings)): ?>
         <p style="text-align:center; color: var(--color-text-muted);">No bookings yet. Use the form above to book a room.</p>
-=======
+
         <?php if (empty($bookings)): ?>
         <p style="text-align:center; color: var(--color-text-muted);">No bookings yet. <a href="booking.php">Book a room</a>.</p>
->>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47
+
         <?php else: ?>
         <div class="table-wrap">
             <table>
@@ -178,10 +175,8 @@ require_once __DIR__ . '/includes/header.php';
             </table>
         </div>
         <?php endif; ?>
-<<<<<<< HEAD
-=======
         <p style="text-align:center; margin-top:1.5rem;"><a href="booking.php" class="btn btn-primary">New Booking</a></p>
->>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47
+
     </div>
 </section>
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

@@ -110,3 +110,4 @@ $rooms = $pdo->query("SELECT room_id, room_no, h_id FROM room ORDER BY room_no")
     </div>
 </section>
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
+  

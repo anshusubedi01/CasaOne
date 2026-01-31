@@ -5,8 +5,6 @@ require_once __DIR__ . '/includes/auth.php';
 require_once __DIR__ . '/includes/header.php';
 
 $pdo = getDB();
-<<<<<<< HEAD
-=======
 $feePaySuccess = '';
 $feePayError = '';
 
@@ -26,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
->>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47
+
 $fees = [];
 
 try {
@@ -105,8 +103,6 @@ $defaultFees = [
                 <p>Fees include accommodation, meals, electricity, WiFi, and housekeeping services. Security deposit of one month's rent required at admission.</p>
             </div>
         </div>
-<<<<<<< HEAD
-=======
 
         <?php if (isLoggedInAsUser()): ?>
         <div class="form-card" style="max-width: 400px; margin: 2rem auto 0;">
@@ -134,7 +130,6 @@ $defaultFees = [
             </form>
         </div>
         <?php endif; ?>
->>>>>>> 6c4852c14ef6286651e49f9a6d9fd27e90960d47
     </div>
 </section>
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
