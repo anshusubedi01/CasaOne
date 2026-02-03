@@ -11,20 +11,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['u_i
     $u_id = (int)$_POST['u_id'];
     if ($_POST['action'] === 'delete' && $u_id > 0) {
         try {
-            $stmt = $pdo->prepare("SELECT reg_id FROM users WHERE u_id = ?");
+            $stmt = $pdo->prepare("SELECT u_id FROM users WHERE u_id = ?");
             $stmt->execute([$u_id]);
-            $row = $stmt->fetch();
-            if ($row) {
-                $reg_id = (int)$row['reg_id'];
+            if ($stmt->fetch()) {
                 $pdo->prepare("DELETE FROM payment WHERE u_id = ?")->execute([$u_id]);
                 try { $pdo->prepare("DELETE FROM booking WHERE u_id = ?")->execute([$u_id]); } catch (Throwable $e) { }
                 try { $pdo->prepare("UPDATE complaint SET u_id = NULL WHERE u_id = ?")->execute([$u_id]); } catch (Throwable $e) { }
                 $pdo->prepare("UPDATE hostel SET u_id = NULL WHERE u_id = ?")->execute([$u_id]);
                 try { $pdo->prepare("UPDATE feedback SET u_id = NULL WHERE u_id = ?")->execute([$u_id]); } catch (Throwable $e) { }
-                try { $pdo->prepare("DELETE FROM remember_tokens WHERE user_id = ?")->execute([$u_id]); } catch (Throwable $e) { }
                 try { $pdo->prepare("DELETE FROM password_reset_tokens WHERE u_id = ?")->execute([$u_id]); } catch (Throwable $e) { }
                 $pdo->prepare("DELETE FROM users WHERE u_id = ?")->execute([$u_id]);
-                $pdo->prepare("DELETE FROM userregistration WHERE reg_id = ?")->execute([$reg_id]);
                 $success = 'User deleted.';
             } else {
                 $error = 'User not found.';
@@ -36,9 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['u_i
 }
 
 $users = $pdo->query("
-    SELECT u.*, ur.reg_date, ur.gender, h.h_name
+    SELECT u.*, h.h_name
     FROM users u
-    LEFT JOIN userregistration ur ON ur.reg_id = u.reg_id
     LEFT JOIN hostel h ON h.h_id = u.h_id
     ORDER BY u.u_id DESC
 ")->fetchAll();

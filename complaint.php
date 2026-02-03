@@ -18,21 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Description is required.';
     } else {
         try {
-            $stmt = $pdo->prepare("INSERT INTO complaint (s_id, a_id, u_id, c_name, description, status, c_date) VALUES (NULL, NULL, ?, ?, ?, 'open', CURDATE())");
+            $stmt = $pdo->prepare("INSERT INTO complaint (a_id, u_id, c_name, description, status, c_date) VALUES (NULL, ?, ?, ?, 'open', CURDATE())");
             $stmt->execute([$userId, $c_name ?: null, $description]);
             $success = 'Complaint submitted. We will get back to you soon.';
         } catch (PDOException $e) {
-            if (strpos($e->getMessage(), 'u_id') !== false) {
-                try {
-                    $stmt = $pdo->prepare("INSERT INTO complaint (s_id, a_id, c_name, description, status, c_date) VALUES (NULL, NULL, ?, ?, 'open', CURDATE())");
-                    $stmt->execute([$c_name ?: null, $description]);
-                    $success = 'Complaint submitted.';
-                } catch (PDOException $e2) {
-                    $error = 'Failed to submit complaint. Run database/schema_complete.sql to set up the database.';
-                }
-            } else {
-                $error = 'Failed to submit complaint.';
-            }
+            $error = 'Failed to submit complaint.';
         }
     }
 }

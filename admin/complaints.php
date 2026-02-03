@@ -16,26 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['c_i
     }
 }
 
-try {
-    $complaints = $pdo->query("
-        SELECT c.*,
-               s.s_name as student_name, s.s_email as student_email,
-               u.u_name as user_name, u.u_email as user_email
-        FROM complaint c
-        LEFT JOIN student s ON s.s_id = c.s_id
-        LEFT JOIN users u ON u.u_id = c.u_id
-        ORDER BY c.c_date DESC, c.c_id DESC
-    ")->fetchAll();
-} catch (PDOException $e) {
-    $complaints = $pdo->query("
-        SELECT c.*, s.s_name as student_name, s.s_email as student_email
-        FROM complaint c
-        LEFT JOIN student s ON s.s_id = c.s_id
-        ORDER BY c.c_date DESC, c.c_id DESC
-    ")->fetchAll();
-    foreach ($complaints as &$c) { $c['user_name'] = null; $c['user_email'] = null; }
-    unset($c);
-}
+$complaints = $pdo->query("
+    SELECT c.*, u.u_name as user_name, u.u_email as user_email
+    FROM complaint c
+    LEFT JOIN users u ON u.u_id = c.u_id
+    ORDER BY c.c_date DESC, c.c_id DESC
+")->fetchAll();
 ?>
 <section class="section">
     <div class="container">
@@ -45,7 +31,7 @@ try {
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>From (User/Student)</th>
+                        <th>From</th>
                         <th>Description</th>
                         <th>Status</th>
                         <th>Date</th>
@@ -54,7 +40,7 @@ try {
                 </thead>
                 <tbody>
                     <?php foreach ($complaints as $c): 
-                        $name = !empty($c['c_name']) ? $c['c_name'] : (!empty($c['user_name']) ? $c['user_name'] . ' (' . ($c['user_email'] ?? '') . ')' : (!empty($c['student_name']) ? $c['student_name'] : '—'));
+                        $name = !empty($c['c_name']) ? $c['c_name'] : (!empty($c['user_name']) ? $c['user_name'] . ' (' . ($c['user_email'] ?? '') . ')' : '—');
                     ?>
                     <tr>
                         <td><?= (int)$c['c_id'] ?></td>

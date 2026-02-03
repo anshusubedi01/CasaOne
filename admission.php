@@ -35,19 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->fetch()) {
             $error = 'An account with this email already exists.';
         } else {
-            $pdo->beginTransaction();
             try {
-                // userregistration.reg_id has no AUTO_INCREMENT in schema, so get next id manually
-                $reg_id = (int)$pdo->query("SELECT COALESCE(MAX(reg_id), 0) + 1 FROM userregistration")->fetchColumn();
-                $stmt = $pdo->prepare("INSERT INTO userregistration (reg_id, reg_name, reg_date, gender, reg_address) VALUES (?, ?, CURDATE(), ?, ?)");
-                $stmt->execute([$reg_id, $name, $gender ?: null, $address ?: null]);
                 $hash = hashPassword($password);
-                $stmt = $pdo->prepare("INSERT INTO users (reg_id, h_id, u_name, u_email, u_phone, u_address, u_password) VALUES (?, NULL, ?, ?, ?, ?, ?)");
-                $stmt->execute([$reg_id, $name, $email, $phone ?: null, $address ?: null, $hash]);
-                $pdo->commit();
+                $stmt = $pdo->prepare("INSERT INTO users (h_id, u_name, u_email, u_phone, u_address, u_password, reg_date, gender) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt->execute([$name, $email, $phone ?: null, $address ?: null, $hash, date('Y-m-d'), $gender ?: null]);
                 $success = 'Registration successful. You can now <a href="login.php">login</a>.';
             } catch (Exception $e) {
-                $pdo->rollBack();
                 $error = 'Registration failed. Please try again.';
             }
         }

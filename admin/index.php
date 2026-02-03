@@ -7,7 +7,6 @@ $pdo = getDB();
 $countHostels = $pdo->query("SELECT COUNT(*) FROM hostel")->fetchColumn();
 $countRooms = $pdo->query("SELECT COUNT(*) FROM room")->fetchColumn();
 $countUsers = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
-$countStudents = $pdo->query("SELECT COUNT(*) FROM student")->fetchColumn();
 $countBookings = 0;
 try {
     $countBookings = $pdo->query("SELECT COUNT(*) FROM booking")->fetchColumn();
@@ -53,10 +52,6 @@ function getRoomImageDashboard($index, $images) {
             <a href="users.php" class="card" style="text-decoration:none; color:inherit;">
                 <h3>Users</h3>
                 <p><?= (int)$countUsers ?> registered users</p>
-            </a>
-            <a href="students.php" class="card" style="text-decoration:none; color:inherit;">
-                <h3>Students</h3>
-                <p><?= (int)$countStudents ?> students</p>
             </a>
             <a href="bookings.php" class="card" style="text-decoration:none; color:inherit;">
                 <h3>Bookings</h3>

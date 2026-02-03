@@ -39,7 +39,6 @@ INSERT INTO `admin` (`a_id`, `a_name`, `a_email`, `a_password`) VALUES
 -- --------------------------------------------------------
 CREATE TABLE `complaint` (
   `c_id` int NOT NULL,
-  `s_id` int DEFAULT NULL,
   `a_id` int DEFAULT NULL,
   `description` text,
   `status` varchar(50) DEFAULT NULL,
@@ -93,52 +92,28 @@ CREATE TABLE `roomtype` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
--- Table structure for table `student`
--- --------------------------------------------------------
-CREATE TABLE `student` (
-  `s_id` int NOT NULL,
-  `a_id` int DEFAULT NULL,
-  `room_id` int DEFAULT NULL,
-  `s_name` varchar(100) DEFAULT NULL,
-  `s_email` varchar(100) DEFAULT NULL,
-  `s_phone` varchar(15) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
--- Table structure for table `userregistration`
--- --------------------------------------------------------
-CREATE TABLE `userregistration` (
-  `reg_id` int NOT NULL,
-  `reg_date` date DEFAULT NULL,
-  `gender` varchar(20) DEFAULT NULL,
-  `reg_name` varchar(200) DEFAULT NULL,
-  `reg_address` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
 -- Table structure for table `users`
 -- --------------------------------------------------------
 CREATE TABLE `users` (
   `u_id` int NOT NULL,
-  `reg_id` int DEFAULT NULL,
   `h_id` int DEFAULT NULL,
   `u_name` varchar(100) DEFAULT NULL,
   `u_email` varchar(100) DEFAULT NULL,
   `u_phone` varchar(15) DEFAULT NULL,
   `u_address` varchar(255) DEFAULT NULL,
-  `u_password` varchar(255) DEFAULT NULL
+  `u_password` varchar(255) DEFAULT NULL,
+  `reg_date` date DEFAULT NULL,
+  `gender` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Indexes
 ALTER TABLE `admin` ADD PRIMARY KEY (`a_id`);
-ALTER TABLE `complaint` ADD PRIMARY KEY (`c_id`), ADD KEY `s_id` (`s_id`), ADD KEY `a_id` (`a_id`);
+ALTER TABLE `complaint` ADD PRIMARY KEY (`c_id`), ADD KEY `a_id` (`a_id`);
 ALTER TABLE `hostel` ADD PRIMARY KEY (`h_id`), ADD KEY `u_id` (`u_id`), ADD KEY `a_id` (`a_id`);
 ALTER TABLE `payment` ADD PRIMARY KEY (`p_id`), ADD KEY `u_id` (`u_id`), ADD KEY `a_id` (`a_id`);
 ALTER TABLE `room` ADD PRIMARY KEY (`room_id`), ADD KEY `h_id` (`h_id`);
 ALTER TABLE `roomtype` ADD PRIMARY KEY (`r_id`), ADD KEY `room_id` (`room_id`);
-ALTER TABLE `student` ADD PRIMARY KEY (`s_id`), ADD KEY `a_id` (`a_id`), ADD KEY `room_id` (`room_id`);
-ALTER TABLE `userregistration` ADD PRIMARY KEY (`reg_id`);
-ALTER TABLE `users` ADD PRIMARY KEY (`u_id`), ADD KEY `reg_id` (`reg_id`), ADD KEY `h_id` (`h_id`);
+ALTER TABLE `users` ADD PRIMARY KEY (`u_id`), ADD KEY `h_id` (`h_id`);
 
 -- AUTO_INCREMENT
 ALTER TABLE `admin` MODIFY `a_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
@@ -147,17 +122,15 @@ ALTER TABLE `hostel` MODIFY `h_id` int NOT NULL AUTO_INCREMENT;
 ALTER TABLE `payment` MODIFY `p_id` int NOT NULL AUTO_INCREMENT;
 ALTER TABLE `room` MODIFY `room_id` int NOT NULL AUTO_INCREMENT;
 ALTER TABLE `roomtype` MODIFY `r_id` int NOT NULL AUTO_INCREMENT;
-ALTER TABLE `student` MODIFY `s_id` int NOT NULL AUTO_INCREMENT;
 ALTER TABLE `users` MODIFY `u_id` int NOT NULL AUTO_INCREMENT;
 
 -- Foreign keys
-ALTER TABLE `complaint` ADD CONSTRAINT `complaint_ibfk_1` FOREIGN KEY (`s_id`) REFERENCES `student` (`s_id`), ADD CONSTRAINT `complaint_ibfk_2` FOREIGN KEY (`a_id`) REFERENCES `admin` (`a_id`);
+ALTER TABLE `complaint` ADD CONSTRAINT `complaint_ibfk_2` FOREIGN KEY (`a_id`) REFERENCES `admin` (`a_id`);
 ALTER TABLE `hostel` ADD CONSTRAINT `hostel_ibfk_1` FOREIGN KEY (`u_id`) REFERENCES `users` (`u_id`), ADD CONSTRAINT `hostel_ibfk_2` FOREIGN KEY (`a_id`) REFERENCES `admin` (`a_id`);
 ALTER TABLE `payment` ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`u_id`) REFERENCES `users` (`u_id`), ADD CONSTRAINT `payment_ibfk_2` FOREIGN KEY (`a_id`) REFERENCES `admin` (`a_id`);
 ALTER TABLE `room` ADD CONSTRAINT `room_ibfk_1` FOREIGN KEY (`h_id`) REFERENCES `hostel` (`h_id`);
 ALTER TABLE `roomtype` ADD CONSTRAINT `roomtype_ibfk_1` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`);
-ALTER TABLE `student` ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`a_id`) REFERENCES `admin` (`a_id`), ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`);
-ALTER TABLE `users` ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`reg_id`) REFERENCES `userregistration` (`reg_id`), ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`h_id`) REFERENCES `hostel` (`h_id`);
+ALTER TABLE `users` ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`h_id`) REFERENCES `hostel` (`h_id`);
 COMMIT;
 
 -- ============================================================

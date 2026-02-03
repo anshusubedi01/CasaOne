@@ -31,7 +31,6 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
                 <a href="index.php" class="<?= $currentPage === 'index' ? 'active' : '' ?>">Dashboard</a>
                 <a href="hostels.php" class="<?= $currentPage === 'hostels' ? 'active' : '' ?>">Hostels</a>
                 <a href="rooms.php" class="<?= $currentPage === 'rooms' ? 'active' : '' ?>">Rooms</a>
-                <a href="students.php" class="<?= $currentPage === 'students' ? 'active' : '' ?>">Students</a>
                 <a href="bookings.php" class="<?= $currentPage === 'bookings' ? 'active' : '' ?>">Bookings</a>
                 <a href="complaints.php" class="<?= $currentPage === 'complaints' ? 'active' : '' ?>">Complaints</a>
                 <a href="feedback.php" class="<?= $currentPage === 'feedback' ? 'active' : '' ?>">Feedback</a>

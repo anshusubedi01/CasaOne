@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             $pdo->prepare("DELETE FROM room WHERE room_id = ?")->execute([(int)$_POST['room_id']]);
             $success = 'Room deleted.';
         } catch (PDOException $e) {
-            $error = 'Cannot delete: room has bookings or students.';
+            $error = 'Cannot delete: room has bookings.';
         }
     }
 }
