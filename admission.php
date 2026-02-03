@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $pdo->beginTransaction();
             try {
-                // userregistration.reg_id has no AUTO_INCREMENT in project.sql, so get next id manually
+                // userregistration.reg_id has no AUTO_INCREMENT in schema, so get next id manually
                 $reg_id = (int)$pdo->query("SELECT COALESCE(MAX(reg_id), 0) + 1 FROM userregistration")->fetchColumn();
                 $stmt = $pdo->prepare("INSERT INTO userregistration (reg_id, reg_name, reg_date, gender, reg_address) VALUES (?, ?, CURDATE(), ?, ?)");
                 $stmt->execute([$reg_id, $name, $gender ?: null, $address ?: null]);

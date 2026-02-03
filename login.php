@@ -82,9 +82,6 @@ require_once __DIR__ . '/includes/header.php';
                     <label>Password *</label>
                     <input type="password" name="password" required>
                 </div>
-                <div class="form-group">
-                    <a href="forgot-password.php">Forgot password?</a>
-                </div>
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">Login</button>
                     <a href="admission.php" class="btn btn-secondary">Register</a>

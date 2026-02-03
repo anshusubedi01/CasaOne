@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: feedback.php?success=1');
             exit;
         } catch (PDOException $e) {
-            $error = 'Feedback failed. Ensure project_extras.sql (feedback table) is imported.';
+            $error = 'Feedback failed. Ensure database/schema_complete.sql is imported.';
         }
     }
 }

@@ -22,7 +22,7 @@ try {
     <div class="container">
         <h1 class="section-title">Bookings</h1>
         <?php if (!empty($noBookingTable)): ?>
-        <p class="alert alert-info">Import <code>database/project_extras.sql</code> to use the booking table.</p>
+        <p class="alert alert-info">Import <code>database/schema_complete.sql</code> to use the booking table.</p>
         <?php elseif (empty($bookings)): ?>
         <p style="color: var(--color-text-muted);">No bookings yet.</p>
         <?php else: ?>
@@ -48,7 +48,7 @@ try {
                         <td><?= htmlspecialchars($b['u_name'] ?? '—') ?> (<?= htmlspecialchars($b['u_email'] ?? '') ?>)</td>
                         <td><?= htmlspecialchars($b['room_no'] ?? '—') ?></td>
                         <td><?= htmlspecialchars($b['h_name'] ?? '—') ?></td>
-                        <td>₹<?= number_format($b['amount'] ?? 0) ?></td>
+                        <td>Rs.<?= number_format($b['amount'] ?? 0) ?></td>
                         <td><?= htmlspecialchars($b['check_in'] ?? '—') ?></td>
                         <td><?= !empty($b['check_out']) ? htmlspecialchars($b['check_out']) : '—' ?></td>
                         <td><span class="badge badge-<?= $b['status'] ?? 'pending' ?>"><?= htmlspecialchars($b['status'] ?? 'pending') ?></span></td>

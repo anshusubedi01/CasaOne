@@ -1,6 +1,6 @@
 <?php
 /**
- * Authentication - Session, Cookie, Password Hashing (project.sql tables)
+ * Authentication - Session, Cookie, Password Hashing (schema_complete.sql tables)
  * Supports: Admin (admin table) and User (users table)
  */
 if (session_status() === PHP_SESSION_NONE) {

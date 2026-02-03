@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room_id'])) {
                 $stmt->execute([$userId, $room_id, $room['h_id'], $room['price'], $check_in]);
                 $bookingSuccess = 'Booking request submitted. Pay to confirm below.';
             } catch (PDOException $e) {
-                $bookingError = 'Booking failed. Ensure project_extras.sql (booking table) is imported.';
+                $bookingError = 'Booking failed. Ensure database/schema_complete.sql is imported.';
             }
         }
     }

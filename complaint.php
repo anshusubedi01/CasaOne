@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt->execute([$c_name ?: null, $description]);
                     $success = 'Complaint submitted.';
                 } catch (PDOException $e2) {
-                    $error = 'Failed to submit complaint. Run database/project_extras.sql to add u_id column.';
+                    $error = 'Failed to submit complaint. Run database/schema_complete.sql to set up the database.';
                 }
             } else {
                 $error = 'Failed to submit complaint.';

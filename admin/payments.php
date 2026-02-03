@@ -24,7 +24,7 @@ $total = $pdo->query("SELECT COALESCE(SUM(amount), 0) FROM payment")->fetchColum
 <section class="section">
     <div class="container">
         <h1 class="section-title">Payments</h1>
-        <p style="color: var(--color-text-muted); margin-bottom:1rem;">Total: ₹<?= number_format($total) ?></p>
+        <p style="color: var(--color-text-muted); margin-bottom:1rem;">Total: Rs.<?= number_format($total) ?></p>
         <div class="table-wrap">
             <table>
                 <thead>
@@ -41,7 +41,7 @@ $total = $pdo->query("SELECT COALESCE(SUM(amount), 0) FROM payment")->fetchColum
                     <tr>
                         <td><?= (int)$p['p_id'] ?></td>
                         <td><?= htmlspecialchars($p['u_name'] ?? '—') ?> (<?= htmlspecialchars($p['u_email'] ?? '—') ?>)</td>
-                        <td>₹<?= number_format($p['amount'] ?? 0) ?></td>
+                        <td>Rs.<?= number_format($p['amount'] ?? 0) ?></td>
                         <td><?= htmlspecialchars($p['pay_type'] ?? '—') ?></td>
                         <td><?= htmlspecialchars($p['pay_date'] ?? '—') ?></td>
                     </tr>

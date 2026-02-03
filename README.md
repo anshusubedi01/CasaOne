@@ -1,19 +1,17 @@
-# Hostel Management System (project.sql backend)
+# Hostel Management System
 
-Full working backend using **project.sql** database tables: **login**, **signup**, **admin panel**, **user panel**, **booking**, **user registration**, **session**, **cookie**, **hashing**.
+Full working backend: **login**, **signup**, **admin panel**, **user panel**, **booking**, **user registration**, **session**, **cookie**, **hashing**.
 
 ## Database
 
-- **project.sql** – Your existing schema (admin, users, userregistration, hostel, room, roomtype, student, complaint, payment).
-- **database/project_extras.sql** – Run **after** project.sql. Adds: `booking`, `remember_tokens`, `feedback`, and `u_id` column on `complaint` for user complaints.
+- **database/schema_complete.sql** – Single schema file: all tables (admin, users, userregistration, hostel, room, roomtype, student, complaint, payment, booking, remember_tokens, feedback, faq, password_reset_tokens, etc.).
 
 ### Setup
 
 1. **XAMPP**: Start **Apache** and **MySQL**.
 2. **phpMyAdmin**: Create database `project` (or use existing).
-3. Import **project.sql** (creates all tables from your dump).
-4. Import **database/project_extras.sql** once (adds booking, remember_tokens, feedback, complaint.u_id).
-5. **config/database.php**: Set `DB_NAME` to `project` (already set). Edit host/user/pass if needed.
+3. Import **database/schema_complete.sql** (creates database and all tables).
+4. **config/database.php**: Set `DB_NAME` to `project` (already set). Edit host/user/pass if needed.
 
 ## Features (unchanged from your frontend)
 
@@ -25,20 +23,20 @@ Full working backend using **project.sql** database tables: **login**, **signup*
 - **Login** – **User** or **Admin** (session + **Remember me** cookie for users)  
 - **Session & cookie** – PHP sessions; optional remember-me uses `remember_tokens`  
 - **Hashing** – `password_hash()` / `password_verify()` for users and admin (admin plain password is hashed on first login)  
-- **Booking** – User books room (table `booking` in project_extras), Pay & Confirm → Check-in → Check-out in My Bookings  
-- **Complaint** – User submits (uses `complaint.u_id` if project_extras run)  
-- **Feedback** – User feedback (table `feedback` in project_extras)  
+- **Booking** – User books room (table `booking`), Pay & Confirm → Check-in → Check-out in My Bookings  
+- **Complaint** – User submits (uses `complaint.u_id`)  
+- **Feedback** – User feedback (table `feedback`)  
 
 ## Admin panel
 
 - **URL**: `http://localhost/project/admin/` or `admin/login.php`  
 - **Login**: Select “Admin” on main login, or go to **admin/login.php**.  
-- **Default admin** (from project.sql): `admin@gmail.com` / `admin@123` (first login hashes this password).  
+- **Default admin**: `admin@gmail.com` / `admin@123` (first login hashes this password).  
 - **Dashboard** – Counts: hostels, rooms, users, students, bookings, complaints, payments  
 - **Hostels** – Add/delete hostels  
 - **Rooms** – Add rooms (hostel, room_no, price, availability, type, capacity), update availability, delete  
 - **Students** – Add/delete students (optional room assignment)  
-- **Bookings** – List all user bookings (needs project_extras)  
+- **Bookings** – List all user bookings  
 - **Complaints** – List complaints, update status (open / in_progress / resolved)  
 - **Payments** – List payments, total  
 - **Users** – List registered users (userregistration + users)  
@@ -50,7 +48,7 @@ Full working backend using **project.sql** database tables: **login**, **signup*
 - **Booking**: Select room (from `room` where availability), check-in date → insert `booking`.  
 - **My Bookings**: Pay & Confirm (inserts `payment`), Check-in, Check-out.  
 - **Complaint**: Insert into `complaint` (u_id if column exists).  
-- **Feedback**: Insert into `feedback` (project_extras).  
+- **Feedback**: Insert into `feedback`.  
 
 ## Structure
 
@@ -58,8 +56,7 @@ Full working backend using **project.sql** database tables: **login**, **signup*
 project/
 ├── config/database.php       # DB name: project
 ├── database/
-│   ├── project.sql            # Your schema (do not change)
-│   └── project_extras.sql     # Booking, remember_tokens, feedback, complaint.u_id
+│   └── schema_complete.sql    # Complete schema (single import)
 ├── includes/
 │   ├── auth.php               # Session, cookie, hashing; isAdmin(), isLoggedInAsUser()
 │   ├── header.php
